@@ -19,20 +19,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  double _statusBarHeight = 0.0;
+  double? _statusBarHeight = 0.0;
   bool _statusBarColorAnimated = false;
-  Color _statusBarColor = Colors.black;
+  Color? _statusBarColor = Colors.black;
   double _statusBarOpacity = 1.0;
   bool _statusBarHidden = false;
-  StatusBarAnimation _statusBarAnimation = StatusBarAnimation.NONE;
-  StatusBarStyle _statusBarStyle = StatusBarStyle.DEFAULT;
+  StatusBarAnimation? _statusBarAnimation = StatusBarAnimation.NONE;
+  StatusBarStyle? _statusBarStyle = StatusBarStyle.DEFAULT;
   bool _statusBarTranslucent = false;
   bool _loadingIndicator = false;
   bool _fullscreenMode = false;
 
   bool _navBarColorAnimated = false;
-  Color _navBarColor = Colors.black;
-  NavigationBarStyle _navBarStyle = NavigationBarStyle.DEFAULT;
+  Color? _navBarColor = Colors.black;
+  NavigationBarStyle? _navBarStyle = NavigationBarStyle.DEFAULT;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    double statusBarHeight;
+    double? statusBarHeight;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       statusBarHeight = await FlutterStatusbarManager.getHeight;
@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     return Text(text, style: textStyle);
   }
 
-  void colorBarChanged(Color val) {
+  void colorBarChanged(Color? val) {
     this.setState(() {
       _statusBarColor = val;
     });
@@ -70,24 +70,24 @@ class _MyAppState extends State<MyApp> {
 
   void updateStatusBar() {
     FlutterStatusbarManager.setColor(
-        _statusBarColor.withOpacity(_statusBarOpacity),
+        _statusBarColor!.withOpacity(_statusBarOpacity),
         animated: _statusBarColorAnimated);
   }
 
-  void statusBarAnimationChanged(StatusBarAnimation val) {
+  void statusBarAnimationChanged(StatusBarAnimation? val) {
     this.setState(() {
       _statusBarAnimation = val;
     });
   }
 
-  void statusBarStyleChanged(StatusBarStyle val) {
+  void statusBarStyleChanged(StatusBarStyle? val) {
     this.setState(() {
       _statusBarStyle = val;
     });
-    FlutterStatusbarManager.setStyle(val);
+    FlutterStatusbarManager.setStyle(val!);
   }
 
-  void colorNavBarChanged(Color val) {
+  void colorNavBarChanged(Color? val) {
     this.setState(() {
       _navBarColor = val;
     });
@@ -95,15 +95,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   void updateNavBar() {
-    FlutterStatusbarManager.setNavigationBarColor(_navBarColor,
+    FlutterStatusbarManager.setNavigationBarColor(_navBarColor!,
         animated: _navBarColorAnimated);
   }
 
-  void navigationBarStyleChanged(NavigationBarStyle val) {
+  void navigationBarStyleChanged(NavigationBarStyle? val) {
     this.setState(() {
       _navBarStyle = val;
     });
-    FlutterStatusbarManager.setNavigationBarStyle(val);
+    FlutterStatusbarManager.setNavigationBarStyle(val!);
   }
 
   @override
@@ -177,7 +177,7 @@ class _MyAppState extends State<MyApp> {
                       _statusBarHidden = val;
                     });
                     FlutterStatusbarManager.setHidden(_statusBarHidden,
-                        animation: _statusBarAnimation);
+                        animation: _statusBarAnimation!);
                   },
                 ),
                 Text("Animation:"),
